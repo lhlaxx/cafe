@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/card/main",
+    "pages/order/main",
+    "pages/map/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#159f9f",
+    "navigationBarTextStyle": "#fff"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "selectedColor": "#159f9f",
+    "borderStyle": "white",
+    "list": [
+      {"pagePath":"pages/index/main", "text":"附近的商铺", "iconPath":"static/img/fujin_01.png", "selectedIconPath":"static/img/fujin_02.png"},
+      {"pagePath":"pages/card/main", "text":"我的卡券", "iconPath":"static/img/card_01.png", "selectedIconPath":"static/img/card_02.png"},
+      {"pagePath":"pages/order/main", "text": "我的订单", "iconPath":"static/img/order_01.png", "selectedIconPath":"static/img/order_02.png"}
+    ]
+  }
+}
