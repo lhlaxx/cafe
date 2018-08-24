@@ -8,7 +8,7 @@ export default {
 
 <style>
 .container {
-  height: 100vh;
+  height: 100%;
   /*width:100vw;*/
   background: #f3f3f3;
   display: flex;

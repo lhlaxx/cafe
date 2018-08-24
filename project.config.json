@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -51,8 +51,14 @@
 				},
 				{
 					"id": 3,
-					"name": "tabBar",
-					"pathName": "pages/tabbar/main",
+					"name": "map",
+					"pathName": "pages/map/main",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "menu",
+					"pathName": "pages/menu/main",
 					"query": ""
 				}
 			]
