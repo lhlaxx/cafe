@@ -3,7 +3,9 @@
     "pages/index/main",
     "pages/card/main",
     "pages/order/main",
-    "pages/map/main"
+    "pages/map/main",
+    "pages/location/main",
+    "pages/menu/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

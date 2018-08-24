@@ -1,7 +1,7 @@
 <template>
   <div class="container" >
-    <map id="map"  scale="14" :latitude="latitude" :longitude="longitude" :markers="markers"  @markertap="markertap" @ show-location>
-      <cover-view class="control" @click="moveToLocation">
+    <map id="map"  scale="14" :latitude="latitude" :longitude="longitude" :markers="markers"   show-location>
+      <cover-view class="control" @click="controltap">
         <cover-image class="img" src="/static/img/yuandian.png" />
       </cover-view>
     </map>
@@ -21,59 +21,61 @@ export  default{
         longitude:"",
         width: 30,
         height: 30
-      }],
-      controls: [{
-        id: 1,
-        iconPath: "/static/img/yuandian.png",
-        position: {
-          left: 7,
-          top: 610 - 50,
-          width: 30,
-          height: 30
-        },
-        clickable: true
       }]
     }
   },
   watch: {
-    latitude: function(val) {
-      this.latitude=val
-    },
-    longitude: function(val) {
-      this.longitude=val
-    }
+
   },
     created() {
-      this.mapCtx = wx.createMapContext('map')
-      console.log(this.mapCtx)
-      let _this = this
-      wx.getLocation({
-        type: "gcj02",
-        success: function(res) {
-          _this.markers[0].latitude = _this.latitude = res.latitude
-          _this.markers[0].longitude = _this.longitude = res.longitude
-          console.log(_this.markers[0].latitude)
-        }
-      })
+
+
+
     },
+  mounted(){
+    let _this = this
+    wx.getLocation({
+      type: "gcj02",
+      success: function(res) {
+        _this.markers[0].latitude = _this.latitude = res.latitude
+        _this.markers[0].longitude = _this.longitude = res.longitude
+
+      }
+    })
+  },
     methods: {
-      moveToLocation: function () {
-        this.mapCtx.moveToLocation()
+      choose(){
+        wx.chooseLocation({
+          success:function(res){
+
+            console.log(res)
+          },
+          fail:function(err){
+            console.log(err)
+          }
+        })
       },
       markertap(e) {
-        console.log(e.mp)
+        console.log(111,e.mp)
       },
       controltap(e) {
-        console.log(e)
+        console.log(e.mp)
 
         let _this = this
         wx.getLocation({
           type: "gcj02",
           success: function(res) {
-            console.log(wx.createMapContext('', this))
-            _this.markers[0].latitude = _this.latitude = res.latitude
-            _this.markers[0].longitude = _this.longitude = res.longitude
-            console.log(_this.markers[0].latitude, _this.latitude)
+            // markers: [{
+            //   iconPath: "/static/img/map-marker-radius.png",
+            //   id: 0,
+            //   latitude:res.latitude,
+            //   longitude:res.longitude,
+            //   width: 30,
+            //   height: 30
+            // }],
+             _this.latitude = res.latitude
+             _this.longitude = res.longitude
+          console.log(_this.markers[0].longitude,_this.longitude,res.longitude)
           }
         })
       },
@@ -97,13 +99,13 @@ export  default{
   .container{
     map{
       width:100%;
-      height:100%;
+      height:60%;
       position:relative;
     }
   }
   .control{
     position: absolute;
-    top:93%;
+    top:91%;
     left:3%;
   }
   .img{
