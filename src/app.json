@@ -5,7 +5,8 @@
     "pages/order/main",
     "pages/map/main",
     "pages/location/main",
-    "pages/menu/main"
+    "pages/menu/main",
+    "pages/gowuche/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
