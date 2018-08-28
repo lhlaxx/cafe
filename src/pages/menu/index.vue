@@ -1,19 +1,14 @@
 <template>
-    <div class="container">
+    <div class="container" >
       <aside class="aside" >
         <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>6</li>
-          <li>7</li>
-          <li>8</li>
+          <li v-for="(item,index) in ullist" :key="index" @click="indexGoods(index)" >
+            <span v-if="clickIndex==index" style="background: rgb(21,159,159);width:100%;height:100%;display: block;">{{item}}</span>
+            <span v-else>{{item}}</span>
+          </li>
         </ul>
       </aside>
-      <section>
-
+      <view-scroll class="section" scroll-y @scroll="scrollIndexGoods" scroll-into-view="{id}">
         <ul>
           <div class="addgo" @click="go"><img class="gouwuche" src="../../../static/img/gouwuche.png" alt=""><span v-if="num!=0">{{num}}</span></div>
           <li v-for="(item,index) in list" :key="index">
@@ -28,7 +23,7 @@
             </div>
           </li>
         </ul>
-      </section>
+      </view-scroll>
     </div>
 </template>
 
@@ -37,18 +32,53 @@
   export default {
     data(){
       return{
-
+        id:0,
+        screenHeight:"",
+        clickIndex:0,
+        ullist:[1,2,3]
       }
     },
     computed:{
+      gradient(){
+        return store.state.gradient
+      },
       list(){
         return store.state.list
       },
       num() {
         return store.state.num
+      },
+
+    },
+    mounted(){
+
+      var _this=this
+        wx.getSystemInfo({
+          success:function(res){
+            _this.screenHeight=res.screenHeight
+          }
+        })
+    },
+    watch:{
+      clickIndex(){
+        console.log(this.clickIndex)
       }
     },
     methods:{
+      scrollIndexGoods(e){
+        var hei=e.mp.detail.scrollTop
+        console.log(hei,this.screenHeight,hei>this.screenHeight*2)
+        if(hei>this.screenHeight*2){
+          this.clickIndex=2
+        }else if(hei>this.screenHeight-50){
+          this.clickIndex=1
+        }else if(hei<=this.screenHeight-50){
+          this.clickIndex=0
+        }
+      },
+      indexGoods(index){
+        this.clickIndex=index
+      },
       go(){
         wx.navigateTo({url:"../gowuche/main"})
       },
@@ -78,22 +108,26 @@
     }
   }
   aside{
+    position: fixed;
+    width:20%;
+    height:100%;
+    background: rgb(121,205,199);
         ul{
           li{
-            width:180rpx;
+            width:100%;
             line-height:80rpx;
             text-align: center;
-            background: #159f9f;
+            background: rgba(121,205,199,1);
             color:#fff;
-            opacity: 0.6;
             bincrease-bottom: 1px solid #cdcdcd;
           }
         }
   }
-  section{
-    width:100%;
+  .section{
+    margin-left:20%;
+    width:80%;
+    height:100vh;
     ul{
-      /*position: relative;*/
       width:100%;
       height:100%;
       .addgo,.gouwuche{

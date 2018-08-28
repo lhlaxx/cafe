@@ -15,11 +15,14 @@
         </li>
       </ul>
     </section>
+    <footer v-if="carts.length>0">{{carts.length}}
+      <div class="price">共￥{{price}}</div>
+      <div class="calculate" @click="calculate">结算</div>
+    </footer>
   </div>
 </template>
 
 <script>
-
     import store from "../../utils/store"
     export default {
       data(){
@@ -36,9 +39,19 @@
         },
         carts(){
           return store.state.carts
+        },
+        price:function(){
+          var calculate=0
+          for(var i = 0;i<store.state.carts.length;i++){
+            calculate=store.state.carts[i].price*store.state.carts[i].num+calculate
+          }
+          return calculate
         }
       },
       methods:{
+        calculate(){
+          console.log(11)
+        },
         go(){
           wx.navigateTo({url:"../gowuche/main"})
         },
@@ -146,6 +159,25 @@
           }
         }
       }
+    }
+  }
+  footer{
+    line-height:100rpx;
+    width:100%;
+    background:#159f9f;
+    color:#fff;
+    position:fixed;
+    bottom:0;
+    display:flex;
+    justify-content: space-between;
+    .price{
+      width:80%;
+      border-right: 1px solid #cdcdcd;
+      text-align: center;
+    }
+    .calculate{
+      width:20%;
+      text-align: center;
     }
   }
 </style>
